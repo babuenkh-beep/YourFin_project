@@ -40,7 +40,16 @@ The Vite development server proxies `/api` requests to `http://127.0.0.1:8000`.
 
 ## Vercel deployment
 
-Deploy `frontend` as the Vercel project's **Root Directory**. Vercel detects Vite and runs the `build` script, producing the `dist` output. `frontend/vercel.json` rewrites browser routes to `index.html` so React Router routes work on direct visits and refreshes.
+Deploy from the repository root. The root `vercel.json` installs and builds `frontend`, publishes `frontend/dist`, and rewrites browser routes to `index.html` so React Router routes work on direct visits and refreshes. This configuration intentionally does not deploy the FastAPI backend as a Vercel function.
+
+For an existing Vercel project, use these settings:
+
+- **Root Directory:** `.` (the repository root)
+- **Install Command:** `npm --prefix frontend ci`
+- **Build Command:** `npm --prefix frontend run build`
+- **Output Directory:** `frontend/dist`
+
+Alternatively, set the project Root Directory to `frontend`; its own `vercel.json` supports that layout as well.
 
 In the Vercel frontend project, configure:
 
