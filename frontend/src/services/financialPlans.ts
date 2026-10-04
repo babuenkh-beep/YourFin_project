@@ -34,7 +34,10 @@ interface FinancialPlanResponse {
   message: string;
 }
 
-const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? '/api').replace(/\/$/, '');
+const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? '/api';
+const apiBaseUrl = (
+  configuredApiBaseUrl.trim() === '' ? '/api' : configuredApiBaseUrl
+).replace(/\/$/, '');
 
 function toNumber(value: string): number {
   return Number(value);
